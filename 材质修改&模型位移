@@ -1,0 +1,164 @@
+using System.Collections;
+using System.Collections.Generic;
+
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SetAlpha : MonoBehaviour
+{
+    // Start is called before the first frame update
+
+    //创建一个滑动条
+    public Slider AlphaSlider;
+
+    //开始：定义各个需要被控制的材质（方法一）
+    public Material NuanTong01;
+    public Material NuanTong02;
+    public Material NuanTong03;
+    
+    public Material dianqi01;
+    public Material dianqi02;
+    
+    public Material pais01;
+    public Material pais02;
+    //结束
+
+    /* 开始：使用数组的方法定义各个需要被控制的材质（方法二）
+    public Material[] MyMat;
+    */
+
+    //开始：定义各需要被隐藏的模型：
+    public GameObject nuant;
+    public GameObject pais;
+    public GameObject dianq;
+    private int x = 1; //三个计数器，当为偶数时执行
+    private int y = 1;
+    private int z = 1;
+    //结束
+    
+    //开始：位移模型
+    public GameObject AllMod; //定义一个模型
+    public float MoveSpeed = 5.0f; //移动的速度
+    //结束
+    
+    void Start()
+    {
+        //设置材质的参数：可以使用方法二代替
+        AlphaSlider.value = 0.4f;
+        NuanTong01.SetFloat("_Alpha",AlphaSlider.value);
+        NuanTong02.SetFloat("_Alpha",AlphaSlider.value);
+        NuanTong03.SetFloat("_Alpha",AlphaSlider.value);
+        
+        dianqi01.SetFloat("_Alpha",AlphaSlider.value);
+        dianqi02.SetFloat("_Alpha",AlphaSlider.value);
+        
+        pais01.SetFloat("_Alpha",AlphaSlider.value);
+        pais02.SetFloat("_Alpha",AlphaSlider.value);
+
+        /* 对应修改材质的方法二
+        foreach (var item in MyMat)
+        {
+            item.SetFloat("_Alpha", AlphaSlider.value);
+        }
+        */
+        
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void setAlpha()
+    {
+        NuanTong01.SetFloat("_Alpha",AlphaSlider.value);
+        NuanTong02.SetFloat("_Alpha",AlphaSlider.value);
+        NuanTong03.SetFloat("_Alpha",AlphaSlider.value);
+        
+        dianqi01.SetFloat("_Alpha",AlphaSlider.value);
+        dianqi02.SetFloat("_Alpha",AlphaSlider.value);
+        
+        pais01.SetFloat("_Alpha",AlphaSlider.value);
+        pais02.SetFloat("_Alpha",AlphaSlider.value);
+
+        /* 对应修改材质的方法二
+        foreach (var item in MyMat)
+        {
+            item.SetFloat("_Alpha", AlphaSlider.value);
+        }
+        */
+    }
+
+    //显示或隐藏各系统
+    public void vnuanshow()
+    {
+        x += 1;
+        if (x % 2 == 0)
+        {
+            nuant.SetActive(false);//取消激活模型，模型会被隐藏
+        }else
+        {
+            nuant.SetActive(true);//反之
+        }
+    }
+    
+    public void vpais()
+    {
+        y += 1;
+        if (y % 2 == 0)
+        {
+            pais.SetActive(false);
+        }else
+        {
+            pais.SetActive(true);
+        }
+    }
+    
+    public void vdianq()
+    {
+        z += 1;
+        if (z % 2 == 0)
+        {
+            dianq.SetActive(false);
+        }else
+        {
+            dianq.SetActive(true);
+        }
+    }
+    
+    //控制位移
+
+    //开始：往模型的不同方向以 MoveSpeed 大小的速度位移
+    public void vup()
+    {
+        AllMod.transform.Translate(Vector3.up * MoveSpeed);
+    }
+    
+    public void vdown()
+    {
+        AllMod.transform.Translate(Vector3.down * MoveSpeed);
+    }
+    
+    public void vright()
+    {
+        AllMod.transform.Translate(Vector3.right * MoveSpeed);
+    }
+    
+    public void vleft()
+    {
+        AllMod.transform.Translate(Vector3.left * MoveSpeed);
+    }
+    
+    public void vforward()
+    {
+        AllMod.transform.Translate(Vector3.forward * MoveSpeed);
+    }
+    
+    public void vback()
+    {
+        AllMod.transform.Translate(Vector3.back * MoveSpeed);
+    }
+    //结束
+}
